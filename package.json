@@ -1,0 +1,40 @@
+{
+  "name": "ecsy-typescript-boilerplate",
+  "version": "0.1.0",
+  "description": "A boilerplate for creating ecsy projects with typescript.",
+  "author": "Robert Long",
+  "license": "MIT",
+  "scripts": {
+    "start": "cross-env NODE_ENV=development ts-node ./src/server/index.ts",
+    "build": "webpack --mode=production --config ./src/server/webpack.config.ts",
+    "deploy": "rm -rf ./dist && yarn build && gh-pages -d dist"
+  },
+  "dependencies": {
+    "ecsy": "^0.4.2",
+    "express": "^4.17.1",
+    "pixi.js": "^6.0.2"
+  },
+  "devDependencies": {
+    "@types/copy-webpack-plugin": "^8.0.0",
+    "@types/express": "^4.16.1",
+    "@types/html-webpack-plugin": "^3.2.0",
+    "@types/webpack": "^5.1.0",
+    "@types/webpack-dev-middleware": "^2.0.2",
+    "@typescript-eslint/eslint-plugin": "^4.22.0",
+    "@typescript-eslint/parser": "^4.22.0",
+    "copy-webpack-plugin": "^8.1.1",
+    "cross-env": "^5.2.0",
+    "eslint": "^7.25.0",
+    "eslint-config-prettier": "^8.3.0",
+    "gh-pages": "^3.1.0",
+    "html-webpack-plugin": "^5.3.1",
+    "prettier": "^2.2.1",
+    "ts-loader": "^6.0.1",
+    "ts-node": "^8.2.0",
+    "typescript": "^4.2.4",
+    "webpack": "^5.1.0",
+    "webpack-cli": "^4.7.0",
+    "webpack-dev-middleware": "^4.1.0",
+    "write-file-webpack-plugin": "^4.5.1"
+  }
+}
