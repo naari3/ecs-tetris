@@ -1,6 +1,7 @@
 import { World } from "ecsy";
-import { Engine, Resource, ResourceState, Sprite, SpriteState, Position } from "./components";
+import { Engine, Resource, ResourceState, Sprite, SpriteState, Position, Piece, Grid, Color } from "./components";
 import { EngineSystem, ResourceLoaderSystem, SpriteSystem } from "./systems";
+import { registerInitialEntities } from "./entities";
 
 const world = new World();
 world
@@ -8,6 +9,9 @@ world
   .registerComponent(Position)
   .registerComponent(Resource)
   .registerComponent(ResourceState)
+  .registerComponent(Piece)
+  .registerComponent(Grid)
+  .registerComponent(Color)
   .registerComponent(Sprite)
   .registerComponent(SpriteState)
   .registerSystem(EngineSystem)
@@ -25,7 +29,8 @@ world.createEntity().addComponent(Engine, {
   elem,
   config,
 });
-console.log("world created");
+
+registerInitialEntities(world);
 
 let prevTime = performance.now();
 
