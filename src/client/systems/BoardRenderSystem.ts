@@ -1,6 +1,7 @@
-import { System } from "ecsy";
+import { Not, System } from "ecsy";
 import type { World, Attributes } from "ecsy";
-import { Engine, Board, IsBoard } from "../components";
+import { Engine, Board, IsBoard, Cell, Color, Sprite, Position } from "../components";
+import { ColorNumToType } from "../components/Color";
 
 export class BoardRenderSystem extends System {
   constructor(world: World, attributes: Attributes) {
@@ -14,9 +15,30 @@ export class BoardRenderSystem extends System {
     if (app === undefined || board === undefined) {
       return;
     }
-    app;
-    board.board.forEach((row) => {
-      console.log(row);
+    this.queries.cells_create.results.forEach((entity) => {
+      let cell = entity.getComponent(Cell);
+      if (cell && board) {
+        let x = cell.x;
+        let y = cell.y;
+        let c = board.board[y][x];
+        entity
+          .addComponent(Color, { color: ColorNumToType[c] })
+          .addComponent(Sprite, { name: "cells", textureName: ColorNumToType[c] })
+          .addComponent(Position, { x: x * 32, y: y * 32 });
+      }
+    });
+
+    this.queries.cells_update.results.forEach((entity) => {
+      let cell = entity.getComponent(Cell);
+      let color = entity.getMutableComponent(Color);
+      let sprite = entity.getMutableComponent(Sprite);
+      if (cell && color && sprite && board) {
+        let x = cell.x;
+        let y = cell.y;
+        let c = board.board[y][x];
+        color.color = ColorNumToType[c];
+        sprite.textureName = ColorNumToType[c];
+      }
     });
   }
 }
@@ -27,5 +49,11 @@ BoardRenderSystem.queries = {
   },
   board: {
     components: [Board, IsBoard],
+  },
+  cells_create: {
+    components: [Cell, Not(Sprite)],
+  },
+  cells_update: {
+    components: [Cell, Color, Sprite],
   },
 };

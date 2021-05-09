@@ -9,8 +9,15 @@ class SpriteSystem extends System {
       let spriteInfo = entity.getComponent(Sprite);
       let position = entity.getComponent(Position);
       let sheet = app?.loader.resources[spriteInfo?.name || ""];
-      let sprite = new PIXISprite(sheet?.texture);
-
+      let texture = (() => {
+        if (spriteInfo?.textureName && sheet?.textures) {
+          return sheet?.textures[spriteInfo.textureName || ""];
+        }
+        return sheet?.texture;
+      })();
+      // debugger;
+      let sprite = new PIXISprite(texture);
+      sprite.name = spriteInfo?.name;
       if (sprite && position) {
         sprite.x = position?.x;
         sprite.y = position?.y;
@@ -25,6 +32,14 @@ class SpriteSystem extends System {
       let spriteState = entity.getMutableComponent(SpriteState);
       let sprite = spriteState?.ref;
       if (spriteState && sprite && position) {
+        let sheet = app?.loader.resources[spriteInfo?.name || ""];
+        let texture = (() => {
+          if (spriteInfo?.textureName && sheet?.textures) {
+            return sheet?.textures[spriteInfo.textureName || ""];
+          }
+          return sheet?.texture;
+        })();
+        if (texture) sprite.texture = texture;
         sprite.x = position?.x;
         sprite.y = position?.y;
         spriteState.ref = sprite;

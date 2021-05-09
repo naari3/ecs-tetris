@@ -1,5 +1,6 @@
 import * as path from "path";
 import * as HTMLWebpackPlugin from "html-webpack-plugin";
+import * as CopyWebpackPlugin from "copy-webpack-plugin";
 
 const config = {
   mode: process.env.NODE_ENV === "production" ? "production" : "development",
@@ -36,6 +37,12 @@ const config = {
   plugins: [
     new HTMLWebpackPlugin({
       template: path.resolve(__dirname, "..", "client", "index.html"),
+    }),
+    new CopyWebpackPlugin({
+      patterns: [
+        { from: path.resolve(__dirname, "..", "..", "public", "cells.json") },
+        { from: path.resolve(__dirname, "..", "..", "public", "cells.png") },
+      ],
     }),
   ],
 };

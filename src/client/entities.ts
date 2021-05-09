@@ -1,7 +1,7 @@
 import { World } from "ecsy";
-import { Color, Grid, Piece, IsPiece } from "./components";
-import { Board, IsBoard } from "./components/Board";
-import { ColorType } from "./components/Color";
+import { Color, Grid, Piece, IsPiece, Engine, Resource, Cell } from "./components";
+import { Board, BoardMatrix, IsBoard } from "./components/Board";
+import { ColorNumToType, ColorType } from "./components/Color";
 
 const minos: { name: string; matrix: number[][]; color: ColorType }[] = [
   {
@@ -77,44 +77,62 @@ const minos: { name: string; matrix: number[][]; color: ColorType }[] = [
 ];
 
 export function registerInitialEntities(world: World) {
+  const config = {
+    width: window.innerWidth,
+    height: window.innerHeight,
+    resolution: window.devicePixelRatio,
+    backgroundColor: 0xffffff,
+  };
+  let elem = document.body;
+  world.createEntity("Engine").addComponent(Engine, {
+    elem,
+    config,
+  });
+
+  world.createEntity().addComponent(Resource, { name: "cells", url: "cells.json" });
+
   minos.forEach(({ name, matrix, color }) => {
     world
-      .createEntity()
+      .createEntity(`Mino${name}`)
       .addComponent(IsPiece)
       .addComponent(Piece, { name })
       .addComponent(Grid, { matrix })
       .addComponent(Color, { color });
   });
-  world
-    .createEntity()
-    .addComponent(IsBoard)
-    .addComponent(Board, {
-      board: [
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], // 1
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], // 20
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], // 21
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], // 25
-      ],
+
+  const board: BoardMatrix = [
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 2], // 25
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], // 21
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], // 20
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [4, 0, 0, 0, 0, 0, 0, 0, 0, 3], // 1
+  ];
+  world.createEntity("Board").addComponent(IsBoard).addComponent(Board, {
+    board,
+  });
+  board.forEach((row, y) => {
+    row.forEach((c, x) => {
+      world.createEntity().addComponent(Cell, { x, y });
     });
+  });
 }

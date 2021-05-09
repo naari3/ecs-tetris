@@ -6,5 +6,20 @@ import { Color } from "./Color";
 import { Sprite, SpriteState } from "./Sprite";
 import { Resource, ResourceState } from "./Resource";
 import { Board, IsBoard } from "./Board";
+import { Cell } from "./Cell";
 
-export { Engine, Sprite, SpriteState, Resource, ResourceState, Position, Piece, IsPiece, Grid, Color, Board, IsBoard };
+export {
+  Engine,
+  Sprite,
+  SpriteState,
+  Resource,
+  ResourceState,
+  Position,
+  Piece,
+  IsPiece,
+  Grid,
+  Color,
+  Board,
+  IsBoard,
+  Cell,
+};

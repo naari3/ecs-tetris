@@ -1,0 +1,209 @@
+{
+	"frames":
+	{
+		"empty":
+		{
+			"frame":
+			{
+				"x":0,
+				"y":0,
+				"w":32,
+				"h":32
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize":
+			{
+				"x":0,
+				"y":0,
+				"w":32,
+				"h":32
+			},
+			"sourceSize":
+			{
+				"w":32,
+				"h":32
+			}
+		},
+		"cyan":
+		{
+			"frame":
+			{
+				"x":32,
+				"y":0,
+				"w":32,
+				"h":32
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize":
+			{
+				"x":32,
+				"y":0,
+				"w":32,
+				"h":32
+			},
+			"sourceSize":
+			{
+				"w":32,
+				"h":32
+			}
+		},
+		"yellow":
+		{
+			"frame":
+			{
+				"x":64,
+				"y":0,
+				"w":32,
+				"h":32
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize":
+			{
+				"x":64,
+				"y":0,
+				"w":32,
+				"h":32
+			},
+			"sourceSize":
+			{
+				"w":32,
+				"h":32
+			}
+		},
+		"purple":
+		{
+			"frame":
+			{
+				"x":96,
+				"y":0,
+				"w":32,
+				"h":32
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize":
+			{
+				"x":96,
+				"y":0,
+				"w":32,
+				"h":32
+			},
+			"sourceSize":
+			{
+				"w":32,
+				"h":32
+			}
+		},
+		"orange":
+		{
+			"frame":
+			{
+				"x":128,
+				"y":0,
+				"w":32,
+				"h":32
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize":
+			{
+				"x":128,
+				"y":0,
+				"w":32,
+				"h":32
+			},
+			"sourceSize":
+			{
+				"w":32,
+				"h":32
+			}
+		},
+		"blue":
+		{
+			"frame":
+			{
+				"x":160,
+				"y":0,
+				"w":32,
+				"h":32
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize":
+			{
+				"x":160,
+				"y":0,
+				"w":32,
+				"h":32
+			},
+			"sourceSize":
+			{
+				"w":32,
+				"h":32
+			}
+		},
+		"green":
+		{
+			"frame":
+			{
+				"x":192,
+				"y":0,
+				"w":32,
+				"h":32
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize":
+			{
+				"x":192,
+				"y":0,
+				"w":32,
+				"h":32
+			},
+			"sourceSize":
+			{
+				"w":32,
+				"h":32
+			}
+		},
+		"red":
+		{
+			"frame":
+			{
+				"x":224,
+				"y":0,
+				"w":32,
+				"h":32
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize":
+			{
+				"x":224,
+				"y":0,
+				"w":32,
+				"h":32
+			},
+			"sourceSize":
+			{
+				"w":32,
+				"h":32
+			}
+		}
+	},
+	"meta":
+	{
+		"app": "http://example.com/",
+		"image":"cells.png",
+		"format": "RGBA8888",
+		"size":
+		{
+				"w":256,
+				"h":32
+		},
+		"scale": 1
+	}
+}

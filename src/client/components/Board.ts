@@ -31,12 +31,12 @@ const TypeMatrix = createType({
 });
 
 type Row = ColorNumber[];
-type BoardMatrix = Row[];
+export type BoardMatrix = Row[];
 
 export class IsBoard extends TagComponent {}
 export class Board extends Component<{}> {
   board!: BoardMatrix;
 }
 Board.schema = {
-  matrix: { type: TypeMatrix },
+  board: { type: TypeMatrix },
 };

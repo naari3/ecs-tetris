@@ -12,6 +12,7 @@ import {
   Board,
   IsBoard,
   IsPiece,
+  Cell,
 } from "./components";
 import { BoardRenderSystem, EngineSystem, ResourceLoaderSystem, SpriteSystem } from "./systems";
 import { registerInitialEntities } from "./entities";
@@ -28,24 +29,13 @@ world
   .registerComponent(Color)
   .registerComponent(Sprite)
   .registerComponent(SpriteState)
+  .registerComponent(Cell)
   .registerComponent(Board)
   .registerComponent(IsBoard)
   .registerSystem(EngineSystem)
   .registerSystem(BoardRenderSystem)
   .registerSystem(ResourceLoaderSystem)
   .registerSystem(SpriteSystem);
-
-const config = {
-  width: window.innerWidth,
-  height: window.innerHeight,
-  resolution: window.devicePixelRatio,
-  backgroundColor: 0xffffff,
-};
-let elem = document.body;
-world.createEntity().addComponent(Engine, {
-  elem,
-  config,
-});
 
 registerInitialEntities(world);
 

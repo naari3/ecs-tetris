@@ -17,5 +17,5 @@ export class Color extends Component<{}> {
   color!: ColorType;
 }
 Color.schema = {
-  matrix: { type: Types.String },
+  color: { type: Types.String },
 };

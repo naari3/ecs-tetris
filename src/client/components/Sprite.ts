@@ -4,12 +4,16 @@ import { Sprite as PIXISprite } from "pixi.js";
 export class Sprite extends Component<{}> {
   name?: string;
   fileName?: string;
+  textureName?: string;
 }
 Sprite.schema = {
   name: {
     type: Types.String,
   },
   fileName: {
+    type: Types.String,
+  },
+  textureName: {
     type: Types.String,
   },
 };
