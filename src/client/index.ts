@@ -5,7 +5,7 @@ import {
   ResourceState,
   Sprite,
   SpriteState,
-  Position,
+  Transform,
   Piece,
   Grid,
   Color,
@@ -14,14 +14,24 @@ import {
   IsPiece,
   Bag,
   CellSprites,
+  CurrentPiece,
+  InitialPosition,
 } from "./components";
-import { BagSystem, BoardRenderSystem, EngineSystem, ResourceLoaderSystem, SpriteSystem } from "./systems";
+import {
+  BagSystem,
+  BoardRenderSystem,
+  CurrentPieceRenderSystem,
+  EngineSystem,
+  PopSystem,
+  ResourceLoaderSystem,
+  SpriteSystem,
+} from "./systems";
 import { registerInitialEntities } from "./entities";
 
 const world = new World();
 world
   .registerComponent(Engine)
-  .registerComponent(Position)
+  .registerComponent(Transform)
   .registerComponent(Resource)
   .registerComponent(ResourceState)
   .registerComponent(Piece)
@@ -34,8 +44,12 @@ world
   .registerComponent(Board)
   .registerComponent(IsBoard)
   .registerComponent(Bag)
+  .registerComponent(CurrentPiece)
+  .registerComponent(InitialPosition)
   .registerSystem(EngineSystem)
   .registerSystem(BagSystem)
+  .registerSystem(PopSystem)
+  .registerSystem(CurrentPieceRenderSystem)
   .registerSystem(BoardRenderSystem)
   .registerSystem(ResourceLoaderSystem)
   .registerSystem(SpriteSystem);

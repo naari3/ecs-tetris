@@ -1,15 +1,9 @@
 import { System } from "ecsy";
-import type { World, Attributes } from "ecsy";
 import { Sprite as PIXISprite } from "pixi.js";
 import { Engine, Board, IsBoard, CellSprites } from "../components";
 import { ColorNumToType } from "../components/Color";
 
 export class BoardRenderSystem extends System {
-  constructor(world: World, attributes: Attributes) {
-    super(world, attributes);
-    console.log("Creation of EngineSystem");
-  }
-
   execute(delta: number, time: number) {
     let app = this.queries.engine.results[0].getComponent(Engine)?.app;
     this.queries.board.results.forEach((entity) => {

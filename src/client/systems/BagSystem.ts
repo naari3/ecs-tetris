@@ -1,5 +1,4 @@
 import { System } from "ecsy";
-import type { World, Attributes } from "ecsy";
 import { Bag } from "../components/Bag";
 import { PieceType } from "../components/Piece";
 
@@ -17,10 +16,6 @@ function shuffle<T>(array: T[]) {
 const newBag: PieceType[] = ["I", "O", "T", "L", "J", "S", "Z"];
 
 export class BagSystem extends System {
-  constructor(world: World, attributes: Attributes) {
-    super(world, attributes);
-  }
-
   execute(delta: number, time: number) {
     let bag = this.queries.bag.results[0].getMutableComponent(Bag);
     if (bag === undefined) {
@@ -34,7 +29,7 @@ export class BagSystem extends System {
       // fill a bag up to 7
       let remain = 7 - bag.bag.length;
       for (let i = 0; i < remain; i++) {
-        let newPiece = bag.nextBag.pop();
+        let newPiece = bag.nextBag.shift();
         if (newPiece) bag.bag.push(newPiece);
       }
     }

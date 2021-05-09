@@ -1,10 +1,21 @@
 import { World } from "ecsy";
-import { Color, Grid, Piece, IsPiece, Engine, Resource, Bag, CellSprites } from "./components";
+import {
+  Color,
+  Grid,
+  Piece,
+  IsPiece,
+  Engine,
+  Resource,
+  Bag,
+  CellSprites,
+  CurrentPiece,
+  InitialPosition,
+} from "./components";
 import { Board, BoardMatrix, IsBoard } from "./components/Board";
 import { ColorType } from "./components/Color";
 import { PieceType } from "./components/Piece";
 
-const minos: { name: PieceType; matrix: number[][]; color: ColorType }[] = [
+const minos: { name: PieceType; matrix: number[][]; color: ColorType; initialPosition: { x: number; y: number } }[] = [
   {
     name: "I",
     matrix: [
@@ -14,6 +25,7 @@ const minos: { name: PieceType; matrix: number[][]; color: ColorType }[] = [
       [2, 1],
     ],
     color: "cyan",
+    initialPosition: { x: 4, y: 1 },
   },
   {
     name: "O",
@@ -24,6 +36,7 @@ const minos: { name: PieceType; matrix: number[][]; color: ColorType }[] = [
       [1, 1],
     ],
     color: "yellow",
+    initialPosition: { x: 4, y: 2 },
   },
   {
     name: "T",
@@ -34,6 +47,7 @@ const minos: { name: PieceType; matrix: number[][]; color: ColorType }[] = [
       [1, 0],
     ],
     color: "purple",
+    initialPosition: { x: 4, y: 3 },
   },
   {
     name: "L",
@@ -44,6 +58,7 @@ const minos: { name: PieceType; matrix: number[][]; color: ColorType }[] = [
       [1, 0],
     ],
     color: "orange",
+    initialPosition: { x: 4, y: 3 },
   },
   {
     name: "J",
@@ -54,6 +69,7 @@ const minos: { name: PieceType; matrix: number[][]; color: ColorType }[] = [
       [1, 0],
     ],
     color: "blue",
+    initialPosition: { x: 4, y: 3 },
   },
   {
     name: "S",
@@ -64,6 +80,7 @@ const minos: { name: PieceType; matrix: number[][]; color: ColorType }[] = [
       [0, 0],
     ],
     color: "green",
+    initialPosition: { x: 4, y: 3 },
   },
   {
     name: "Z",
@@ -74,6 +91,7 @@ const minos: { name: PieceType; matrix: number[][]; color: ColorType }[] = [
       [1, 0],
     ],
     color: "red",
+    initialPosition: { x: 4, y: 3 },
   },
 ];
 
@@ -92,13 +110,14 @@ export function registerInitialEntities(world: World) {
 
   world.createEntity().addComponent(Resource, { name: "cells", url: "cells.json" });
 
-  minos.forEach(({ name, matrix, color }) => {
+  minos.forEach(({ name, matrix, color, initialPosition }) => {
     world
       .createEntity(`Mino${name}`)
       .addComponent(IsPiece)
       .addComponent(Piece, { name })
       .addComponent(Grid, { matrix })
-      .addComponent(Color, { color });
+      .addComponent(Color, { color })
+      .addComponent(InitialPosition, initialPosition);
   });
 
   const board: BoardMatrix = [
@@ -128,12 +147,11 @@ export function registerInitialEntities(world: World) {
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [4, 0, 0, 0, 0, 0, 0, 0, 0, 3], // 1
   ];
-  let boardEntity = world.createEntity("Board");
-  boardEntity
+  world
+    .createEntity("Board")
     .addComponent(IsBoard)
-    .addComponent(Board, {
-      board,
-    })
+    .addComponent(Board, { board })
     .addComponent(Bag, { bag: [] })
-    .addComponent(CellSprites);
+    .addComponent(CellSprites)
+    .addComponent(CurrentPiece);
 }

@@ -1,5 +1,5 @@
 import { System, Not } from "ecsy";
-import { Engine, Sprite, SpriteState, Position } from "../components";
+import { Engine, Sprite, SpriteState, Transform } from "../components";
 import { Sprite as PIXISprite } from "pixi.js";
 
 class SpriteSystem extends System {
@@ -7,7 +7,7 @@ class SpriteSystem extends System {
     let app = this.queries.engine.results[0].getComponent(Engine)?.app;
     this.queries.creates.results.forEach((entity) => {
       let spriteInfo = entity.getComponent(Sprite);
-      let position = entity.getComponent(Position);
+      let transform = entity.getComponent(Transform);
       let sheet = app?.loader.resources[spriteInfo?.name || ""];
       let texture = (() => {
         if (spriteInfo?.textureName && sheet?.textures) {
@@ -18,9 +18,9 @@ class SpriteSystem extends System {
       // debugger;
       let sprite = new PIXISprite(texture);
       sprite.name = spriteInfo?.name;
-      if (sprite && position) {
-        sprite.x = position?.x;
-        sprite.y = position?.y;
+      if (sprite && transform) {
+        sprite.x = transform?.x;
+        sprite.y = transform?.y;
       }
       app?.stage.addChild(sprite);
       entity.addComponent(SpriteState, { ref: sprite });
@@ -28,10 +28,10 @@ class SpriteSystem extends System {
 
     this.queries.updates.results.forEach((entity) => {
       let spriteInfo = entity.getComponent(Sprite);
-      let position = entity.getComponent(Position);
+      let transform = entity.getComponent(Transform);
       let spriteState = entity.getMutableComponent(SpriteState);
       let sprite = spriteState?.ref;
-      if (spriteState && sprite && position) {
+      if (spriteState && sprite && transform) {
         let sheet = app?.loader.resources[spriteInfo?.name || ""];
         let texture = (() => {
           if (spriteInfo?.textureName && sheet?.textures) {
@@ -40,8 +40,8 @@ class SpriteSystem extends System {
           return sheet?.texture;
         })();
         if (texture) sprite.texture = texture;
-        sprite.x = position?.x;
-        sprite.y = position?.y;
+        sprite.x = transform?.x;
+        sprite.y = transform?.y;
         spriteState.ref = sprite;
       }
     });
@@ -50,13 +50,13 @@ class SpriteSystem extends System {
 
 SpriteSystem.queries = {
   creates: {
-    components: [Sprite, Not(SpriteState), Position],
+    components: [Sprite, Not(SpriteState), Transform],
   },
   deletes: {
     components: [Not(Sprite), SpriteState],
   },
   updates: {
-    components: [Sprite, SpriteState, Position],
+    components: [Sprite, SpriteState, Transform],
   },
   engine: { components: [Engine] },
 };

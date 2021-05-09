@@ -1,12 +1,12 @@
 import { Component, Types } from "ecsy";
 
-class Position extends Component<{}> {
+class Transform extends Component<{}> {
   x!: number;
   y!: number;
 }
-Position.schema = {
+Transform.schema = {
   x: { type: Types.Number },
   y: { type: Types.Number },
 };
 
-export { Position };
+export { Transform };

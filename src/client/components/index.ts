@@ -1,5 +1,5 @@
 import { Engine } from "./Engine";
-import { Position } from "./Position";
+import { Transform } from "./Transform";
 import { Piece, IsPiece } from "./Piece";
 import { Grid } from "./Grid";
 import { Color } from "./Color";
@@ -8,6 +8,8 @@ import { Resource, ResourceState } from "./Resource";
 import { Board, IsBoard } from "./Board";
 import { CellSprites } from "./CellSprites";
 import { Bag } from "./Bag";
+import { CurrentPiece } from "./CurrentPiece";
+import { InitialPosition } from "./InitialPosition";
 
 export {
   Engine,
@@ -15,7 +17,7 @@ export {
   SpriteState,
   Resource,
   ResourceState,
-  Position,
+  Transform,
   Piece,
   IsPiece,
   Grid,
@@ -24,4 +26,6 @@ export {
   IsBoard,
   CellSprites,
   Bag,
+  CurrentPiece,
+  InitialPosition,
 };
