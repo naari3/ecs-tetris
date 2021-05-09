@@ -13,8 +13,9 @@ import {
   IsBoard,
   IsPiece,
   Cell,
+  Bag,
 } from "./components";
-import { BoardRenderSystem, EngineSystem, ResourceLoaderSystem, SpriteSystem } from "./systems";
+import { BagSystem, BoardRenderSystem, EngineSystem, ResourceLoaderSystem, SpriteSystem } from "./systems";
 import { registerInitialEntities } from "./entities";
 
 const world = new World();
@@ -32,7 +33,9 @@ world
   .registerComponent(Cell)
   .registerComponent(Board)
   .registerComponent(IsBoard)
+  .registerComponent(Bag)
   .registerSystem(EngineSystem)
+  .registerSystem(BagSystem)
   .registerSystem(BoardRenderSystem)
   .registerSystem(ResourceLoaderSystem)
   .registerSystem(SpriteSystem);

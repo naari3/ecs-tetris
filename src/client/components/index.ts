@@ -7,6 +7,7 @@ import { Sprite, SpriteState } from "./Sprite";
 import { Resource, ResourceState } from "./Resource";
 import { Board, IsBoard } from "./Board";
 import { Cell } from "./Cell";
+import { Bag } from "./Bag";
 
 export {
   Engine,
@@ -22,4 +23,5 @@ export {
   Board,
   IsBoard,
   Cell,
+  Bag,
 };

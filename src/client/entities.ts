@@ -1,9 +1,10 @@
 import { World } from "ecsy";
-import { Color, Grid, Piece, IsPiece, Engine, Resource, Cell } from "./components";
+import { Color, Grid, Piece, IsPiece, Engine, Resource, Cell, Bag } from "./components";
 import { Board, BoardMatrix, IsBoard } from "./components/Board";
-import { ColorNumToType, ColorType } from "./components/Color";
+import { ColorType } from "./components/Color";
+import { PieceType } from "./components/Piece";
 
-const minos: { name: string; matrix: number[][]; color: ColorType }[] = [
+const minos: { name: PieceType; matrix: number[][]; color: ColorType }[] = [
   {
     name: "I",
     matrix: [
@@ -135,4 +136,6 @@ export function registerInitialEntities(world: World) {
       world.createEntity().addComponent(Cell, { x, y });
     });
   });
+
+  world.createEntity("Bag").addComponent(Bag, { bag: [] });
 }
