@@ -1,5 +1,6 @@
 import { World } from "ecsy";
-import { Color, Grid, Piece } from "./components";
+import { Color, Grid, Piece, IsPiece } from "./components";
+import { Board, IsBoard } from "./components/Board";
 import { ColorType } from "./components/Color";
 
 const minos: { name: string; matrix: number[][]; color: ColorType }[] = [
@@ -77,6 +78,43 @@ const minos: { name: string; matrix: number[][]; color: ColorType }[] = [
 
 export function registerInitialEntities(world: World) {
   minos.forEach(({ name, matrix, color }) => {
-    world.createEntity().addComponent(Piece, { name }).addComponent(Grid, { matrix }).addComponent(Color, { color });
+    world
+      .createEntity()
+      .addComponent(IsPiece)
+      .addComponent(Piece, { name })
+      .addComponent(Grid, { matrix })
+      .addComponent(Color, { color });
   });
+  world
+    .createEntity()
+    .addComponent(IsBoard)
+    .addComponent(Board, {
+      board: [
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], // 1
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], // 20
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], // 21
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], // 25
+      ],
+    });
 }

@@ -1,4 +1,4 @@
-import { Component, Types } from "ecsy";
+import { Component, TagComponent, Types } from "ecsy";
 
 export class Piece extends Component<{}> {
   name!: string;
@@ -6,3 +6,5 @@ export class Piece extends Component<{}> {
 Piece.schema = {
   name: { type: Types.String },
 };
+
+export class IsPiece extends TagComponent {}

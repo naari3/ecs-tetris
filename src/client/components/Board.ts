@@ -1,4 +1,5 @@
-import { Component, createType } from "ecsy";
+import { Component, createType, TagComponent } from "ecsy";
+import { ColorNumber, ColorType } from "./Color";
 
 const copyMatrix = (src: number[][], dest: number[][]): number[][] => {
   if (!src) {
@@ -29,9 +30,13 @@ const TypeMatrix = createType({
   copy: copyMatrix,
 });
 
-export class Grid extends Component<{}> {
-  matrix!: number[][];
+type Row = ColorNumber[];
+type BoardMatrix = Row[];
+
+export class IsBoard extends TagComponent {}
+export class Board extends Component<{}> {
+  board!: BoardMatrix;
 }
-Grid.schema = {
+Board.schema = {
   matrix: { type: TypeMatrix },
 };

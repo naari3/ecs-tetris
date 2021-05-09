@@ -1,6 +1,19 @@
 import { World } from "ecsy";
-import { Engine, Resource, ResourceState, Sprite, SpriteState, Position, Piece, Grid, Color } from "./components";
-import { EngineSystem, ResourceLoaderSystem, SpriteSystem } from "./systems";
+import {
+  Engine,
+  Resource,
+  ResourceState,
+  Sprite,
+  SpriteState,
+  Position,
+  Piece,
+  Grid,
+  Color,
+  Board,
+  IsBoard,
+  IsPiece,
+} from "./components";
+import { BoardRenderSystem, EngineSystem, ResourceLoaderSystem, SpriteSystem } from "./systems";
 import { registerInitialEntities } from "./entities";
 
 const world = new World();
@@ -10,11 +23,15 @@ world
   .registerComponent(Resource)
   .registerComponent(ResourceState)
   .registerComponent(Piece)
+  .registerComponent(IsPiece)
   .registerComponent(Grid)
   .registerComponent(Color)
   .registerComponent(Sprite)
   .registerComponent(SpriteState)
+  .registerComponent(Board)
+  .registerComponent(IsBoard)
   .registerSystem(EngineSystem)
+  .registerSystem(BoardRenderSystem)
   .registerSystem(ResourceLoaderSystem)
   .registerSystem(SpriteSystem);
 
