@@ -10,6 +10,7 @@ import {
   CellSprites,
   CurrentPiece,
   InitialPosition,
+  Input,
 } from "./components";
 import { Board, BoardMatrix, IsBoard } from "./components/Board";
 import { ColorType } from "./components/Color";
@@ -153,5 +154,6 @@ export function registerInitialEntities(world: World) {
     .addComponent(Board, { board })
     .addComponent(Bag, { bag: [] })
     .addComponent(CellSprites)
-    .addComponent(CurrentPiece);
+    .addComponent(CurrentPiece)
+    .addComponent(Input);
 }

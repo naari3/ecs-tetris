@@ -5,6 +5,7 @@ import { BoardRenderSystem } from "./BoardRenderSystem";
 import { BagSystem } from "./BagSystem";
 import { CurrentPieceRenderSystem } from "./CurrentPieceRenderSystem";
 import { PopSystem } from "./PopSystem";
+import { InputSystem } from "./InputSystem";
 
 export {
   EngineSystem,
@@ -14,4 +15,5 @@ export {
   BagSystem,
   CurrentPieceRenderSystem,
   PopSystem,
+  InputSystem,
 };

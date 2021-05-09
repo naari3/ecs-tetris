@@ -10,6 +10,7 @@ import { CellSprites } from "./CellSprites";
 import { Bag } from "./Bag";
 import { CurrentPiece } from "./CurrentPiece";
 import { InitialPosition } from "./InitialPosition";
+import { Input } from "./Input";
 
 export {
   Engine,
@@ -28,4 +29,5 @@ export {
   Bag,
   CurrentPiece,
   InitialPosition,
+  Input,
 };

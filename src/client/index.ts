@@ -16,12 +16,14 @@ import {
   CellSprites,
   CurrentPiece,
   InitialPosition,
+  Input,
 } from "./components";
 import {
   BagSystem,
   BoardRenderSystem,
   CurrentPieceRenderSystem,
   EngineSystem,
+  InputSystem,
   PopSystem,
   ResourceLoaderSystem,
   SpriteSystem,
@@ -46,6 +48,8 @@ world
   .registerComponent(Bag)
   .registerComponent(CurrentPiece)
   .registerComponent(InitialPosition)
+  .registerComponent(Input)
+  .registerSystem(InputSystem)
   .registerSystem(EngineSystem)
   .registerSystem(BagSystem)
   .registerSystem(PopSystem)
