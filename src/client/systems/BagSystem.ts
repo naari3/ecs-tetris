@@ -19,7 +19,6 @@ const newBag: PieceType[] = ["I", "O", "T", "L", "J", "S", "Z"];
 export class BagSystem extends System {
   constructor(world: World, attributes: Attributes) {
     super(world, attributes);
-    console.log("Creation of EngineSystem");
   }
 
   execute(delta: number, time: number) {
@@ -30,8 +29,6 @@ export class BagSystem extends System {
     if (bag.nextBag.length <= 0) bag.nextBag = shuffle(newBag);
 
     if (bag.bag.length <= 0) bag.bag = shuffle(newBag);
-
-    console.log(bag);
 
     if (bag.bag.length < 7) {
       // fill a bag up to 7

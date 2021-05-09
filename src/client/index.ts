@@ -12,8 +12,8 @@ import {
   Board,
   IsBoard,
   IsPiece,
-  Cell,
   Bag,
+  CellSprites,
 } from "./components";
 import { BagSystem, BoardRenderSystem, EngineSystem, ResourceLoaderSystem, SpriteSystem } from "./systems";
 import { registerInitialEntities } from "./entities";
@@ -30,7 +30,7 @@ world
   .registerComponent(Color)
   .registerComponent(Sprite)
   .registerComponent(SpriteState)
-  .registerComponent(Cell)
+  .registerComponent(CellSprites)
   .registerComponent(Board)
   .registerComponent(IsBoard)
   .registerComponent(Bag)

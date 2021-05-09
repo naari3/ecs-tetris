@@ -6,7 +6,7 @@ import { Color } from "./Color";
 import { Sprite, SpriteState } from "./Sprite";
 import { Resource, ResourceState } from "./Resource";
 import { Board, IsBoard } from "./Board";
-import { Cell } from "./Cell";
+import { CellSprites } from "./CellSprites";
 import { Bag } from "./Bag";
 
 export {
@@ -22,6 +22,6 @@ export {
   Color,
   Board,
   IsBoard,
-  Cell,
+  CellSprites,
   Bag,
 };

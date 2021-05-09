@@ -1,6 +1,7 @@
-import { Not, System } from "ecsy";
+import { System } from "ecsy";
 import type { World, Attributes } from "ecsy";
-import { Engine, Board, IsBoard, Cell, Color, Sprite, Position } from "../components";
+import { Sprite as PIXISprite } from "pixi.js";
+import { Engine, Board, IsBoard, CellSprites } from "../components";
 import { ColorNumToType } from "../components/Color";
 
 export class BoardRenderSystem extends System {
@@ -11,34 +12,35 @@ export class BoardRenderSystem extends System {
 
   execute(delta: number, time: number) {
     let app = this.queries.engine.results[0].getComponent(Engine)?.app;
-    let board = this.queries.board.results[0].getComponent(Board);
-    if (app === undefined || board === undefined) {
-      return;
-    }
-    this.queries.cells_create.results.forEach((entity) => {
-      let cell = entity.getComponent(Cell);
-      if (cell && board) {
-        let x = cell.x;
-        let y = cell.y;
-        let c = board.board[y][x];
-        entity
-          .addComponent(Color, { color: ColorNumToType[c] })
-          .addComponent(Sprite, { name: "cells", textureName: ColorNumToType[c] })
-          .addComponent(Position, { x: x * 32, y: y * 32 });
+    this.queries.board.results.forEach((entity) => {
+      let board = entity.getComponent(Board);
+      if (app === undefined || board === undefined) {
+        return;
       }
-    });
 
-    this.queries.cells_update.results.forEach((entity) => {
-      let cell = entity.getComponent(Cell);
-      let color = entity.getMutableComponent(Color);
-      let sprite = entity.getMutableComponent(Sprite);
-      if (cell && color && sprite && board) {
-        let x = cell.x;
-        let y = cell.y;
-        let c = board.board[y][x];
-        color.color = ColorNumToType[c];
-        sprite.textureName = ColorNumToType[c];
-      }
+      let cs = entity.getMutableComponent(CellSprites);
+      board.board.forEach((row, y) => {
+        if (cs && cs.colors[y] === undefined) {
+          cs.colors[y] = [];
+          cs.refs[y] = [];
+        }
+        row.forEach((c, x) => {
+          if (cs === undefined) return;
+          if (cs.colors[y][x] != ColorNumToType[c]) {
+            let sheet = app?.loader.resources["cells"];
+            if (sheet?.textures === undefined) {
+              return;
+            }
+            let texture = sheet?.textures[ColorNumToType[c]];
+            let sprite = new PIXISprite(texture);
+            sprite.x = x * 32;
+            sprite.y = y * 32;
+            app?.stage.addChild(sprite);
+            cs.colors[y][x] = ColorNumToType[c];
+            cs.refs[y][x] = sprite;
+          }
+        });
+      });
     });
   }
 }
@@ -48,12 +50,6 @@ BoardRenderSystem.queries = {
     components: [Engine],
   },
   board: {
-    components: [Board, IsBoard],
-  },
-  cells_create: {
-    components: [Cell, Not(Sprite)],
-  },
-  cells_update: {
-    components: [Cell, Color, Sprite],
+    components: [Board, IsBoard, CellSprites],
   },
 };

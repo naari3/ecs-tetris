@@ -1,5 +1,5 @@
 import { World } from "ecsy";
-import { Color, Grid, Piece, IsPiece, Engine, Resource, Cell, Bag } from "./components";
+import { Color, Grid, Piece, IsPiece, Engine, Resource, Bag, CellSprites } from "./components";
 import { Board, BoardMatrix, IsBoard } from "./components/Board";
 import { ColorType } from "./components/Color";
 import { PieceType } from "./components/Piece";
@@ -128,14 +128,12 @@ export function registerInitialEntities(world: World) {
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [4, 0, 0, 0, 0, 0, 0, 0, 0, 3], // 1
   ];
-  world.createEntity("Board").addComponent(IsBoard).addComponent(Board, {
-    board,
-  });
-  board.forEach((row, y) => {
-    row.forEach((c, x) => {
-      world.createEntity().addComponent(Cell, { x, y });
-    });
-  });
-
-  world.createEntity("Bag").addComponent(Bag, { bag: [] });
+  let boardEntity = world.createEntity("Board");
+  boardEntity
+    .addComponent(IsBoard)
+    .addComponent(Board, {
+      board,
+    })
+    .addComponent(Bag, { bag: [] })
+    .addComponent(CellSprites);
 }
